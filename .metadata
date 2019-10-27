@@ -1,0 +1,25 @@
+# This file tracks properties of this Flutter project.
+# Used by Flutter tool to assess capabilities and perform upgrades etc.
+#
+# This file should be version controlled and should not be manually edited.
+
+version:
+  revision: 1aedbb1835bd6eb44550293d57d4d124f19901f0
+  channel: stable
+
+project_type: module
+
+
+
+
+
+
+Future<Map> getPhotos(String searchQuery) async {
+  final String apiKey = '12767634-de61c4a8d872248a18dce66ea';
+  final String url =
+      'https://pixabay.com/api/?key=$apiKey&q=$searchQuery&image_type=photo&pretty=true';
+  final response = await http.get(url);
+  final jsonResult = jsonDecode(response.body);
+
+  return jsonResult;
+}
