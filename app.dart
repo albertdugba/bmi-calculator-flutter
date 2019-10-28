@@ -1,7 +1,12 @@
 // import 'package:flutter/rendering.dart';
 
+Map<String, int> phoneBook = {
+  'Kyle': 2222,
+  'Kinney': 1234,
+  'Scot': 09876,
+  'Brian': 098765
+};
+
 void main() {
-  int age = 90;
-  bool canDrinkAlcohol = age > 100 ? false : true;
-  print(canDrinkAlcohol);
+  print(phoneBook.values);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_module/results_page.dart';
 import 'package:flutter_module/utils/constants.dart';
 import 'package:flutter_module/utils/utils.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +14,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 180;
+  int weight = 60;
+  int age = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -81,17 +84,27 @@ class _InputPageState extends State<InputPage> {
                         )
                       ],
                     ),
-                    Slider(
-                      value: height.toDouble(),
-                      onChanged: (double newValue) {
-                        setState(() {
-                          height = newValue.round();
-                        });
-                      },
-                      activeColor: Color(0xFFEB1555),
-                      inactiveColor: Color(0xFFD8E98),
-                      min: 120.0,
-                      max: 220.0,
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                          inactiveTrackColor: Color(0xFFD8E98),
+                          activeTrackColor: Colors.white,
+                          overlayColor: Color(0x15EB1555),
+                          thumbColor: Color(0x29EB1555),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 30.0)),
+                      child: Slider(
+                        value: height.toDouble(),
+                        onChanged: (double newValue) {
+                          setState(() {
+                            height = newValue.round();
+                          });
+                        },
+                        activeColor: Color(0xFFEB1555),
+                        min: 120.0,
+                        max: 220.0,
+                      ),
                     )
                   ],
                 ),
@@ -101,18 +114,85 @@ class _InputPageState extends State<InputPage> {
                 child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReuseableCard(colour: kActiveCardColour),
+                  child: ReuseableCard(
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'WEIGHT',
+                            style: kLabelTextStyle,
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: kNumberTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              RoundButtom(
+                                icon: FontAwesomeIcons.plus,
+                                onPress: () {
+                                  setState(() {
+                                    weight += 1;
+                                  });
+                                },
+                              ),
+                              SizedBox(width: 10.0),
+                              RoundButtom(
+                                icon: FontAwesomeIcons.minus,
+                                onPress: () {
+                                  setState(() {
+                                    weight -= 1;
+                                  });
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      colour: kActiveCardColour),
                 ),
                 Expanded(
-                  child: ReuseableCard(colour: kActiveCardColour),
+                  child: ReuseableCard(
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('AGE', style: kLabelTextStyle),
+                          Text(age.toString(), style: kNumberTextStyle),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              RoundButtom(
+                                icon: FontAwesomeIcons.plus,
+                                onPress: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                              ),
+                              SizedBox(width: 10.0),
+                              RoundButtom(
+                                icon: FontAwesomeIcons.minus,
+                                onPress: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      colour: kActiveCardColour),
                 ),
               ],
             )),
-            Container(
-              color: kBottomContainerColour,
-              margin: const EdgeInsets.only(top: 12.0),
-              width: double.infinity,
-              height: kBottomheightContainer,
+            BottomButton(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ResultsPage()));
+              },
+              buttonTitle: 'CALCULATE',
             )
           ],
         ));

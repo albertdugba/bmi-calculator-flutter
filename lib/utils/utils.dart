@@ -45,3 +45,42 @@ class CardContent extends StatelessWidget {
     );
   }
 }
+
+class RoundButtom extends StatelessWidget {
+  final IconData icon;
+  final Function onPress;
+
+  RoundButtom({@required this.icon, @required this.onPress});
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: onPress,
+      child: Icon(icon),
+      constraints: BoxConstraints.tightFor(width: 56.0, height: 56.0),
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+    );
+  }
+}
+
+class BottomButton extends StatelessWidget {
+  final Function onTap;
+  final String buttonTitle;
+
+  BottomButton({@required this.onTap, @required this.buttonTitle});
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        color: kBottomContainerColour,
+        margin: const EdgeInsets.only(top: 12.0),
+        padding: const EdgeInsets.only(bottom: 20.0),
+        width: double.infinity,
+        height: kBottomheightContainer,
+        child: Text(buttonTitle,
+            textAlign: TextAlign.center, style: kLargeButtonTextStyle),
+      ),
+    );
+  }
+}
